@@ -21,8 +21,8 @@ fn callback(char *data, void mut *closureContext) {
 
 fn main() -> int {
   char *data = "hello";
-  let mut ctx = (Context mut *) &(Context { data: data });
-  let mut container = Container { ctx: ctx };
+  let mut ctx = (Context mut *) &(Context { data });
+  let mut container = Container { ctx };
 
   // closure with a container pointer back to `container`
   container.cb = Callback { fn: callback, ctx: &container };
