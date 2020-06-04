@@ -1,0 +1,19 @@
+using <stdlib.h>::{ atoi }
+using <stdio.h>::{ printf }
+using log
+using ast
+
+macro repeat() {
+  new+1024 ctx = ast::from_macro();
+  let count = (int) atoi(ctx.args[0].v.string);
+  let source = ctx.args[1].v.string;
+
+  for (int mut i = 0; i < count; ++i) {
+    printf("%s\n", source);
+  }
+}
+
+fn main() -> int {
+  @repeat(2, "printf(\"hello macro\n\");");
+  return 0;
+}

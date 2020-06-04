@@ -1,0 +1,12 @@
+using log
+
+struct Object {
+  char *key;
+  char *value;
+}
+
+fn main() -> int {
+  let object = Object { key: "hello", value: "world" };
+  log::info("%s=%s\n", object.key, object.value);
+  return 0;
+}

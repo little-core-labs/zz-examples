@@ -1,0 +1,31 @@
+using log;
+
+closure Callback(char *data);
+
+struct Context {
+  void *data;
+}
+
+struct Container {
+  Context *ctx;
+  Callback cb;
+}
+
+// closure context is in tail position of function signature
+fn callback(char *data, void mut *closureContext) {
+  let container = (Container *) closureContext;
+  let context = container->ctx;
+  static_attest(safe(context));
+  log::info("hello from callback with context with data: %s %s", context->data, data);
+}
+
+fn main() -> int {
+  char *data = "hello";
+  let mut ctx = (Context mut *) &(Context { data: data });
+  let mut container = Container { ctx: ctx };
+
+  // closure with a container pointer back to `container`
+  container.cb = Callback { fn: callback, ctx: &container };
+  container.cb("world");
+  return 0;
+}

@@ -1,0 +1,38 @@
+using log
+
+// a theory can ensure state between functions on a particular type
+theory opened(Resource *self) -> bool;
+
+struct Resource {
+  bool opened;
+  bool closed;
+}
+
+struct CustomResource {
+  Resource super;
+}
+
+fn open(Resource mut *self)
+  model opened(*self)
+{
+  log::info("opening...");
+  self->opened = true;
+  static_attest(opened(*self));
+}
+
+fn close(Resource mut *self)
+  where opened(*self)
+{
+  log::info("closing...");
+  self->opened = false;
+  self->closed = true;
+}
+
+fn main() -> int {
+  CustomResource mut resource = {0};
+
+  resource.open();
+  // if this is called _before_ `resource.open()`, we'll get a compiler error
+  resource.close();
+  return 0;
+}

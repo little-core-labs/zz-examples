@@ -1,0 +1,27 @@
+using log;
+
+struct Object {
+  char *k;
+  char *v;
+}
+
+fn set(Object mut *self, char *key, char *value) {
+  self->k = key;
+  self->v = value;
+}
+
+fn get(Object mut *self, char *key) -> char * {
+  // pointer comparson
+  if self->k == key {
+    return self->v;
+  }
+
+  return 0;
+}
+
+fn main() -> int {
+  Object mut object = {0};
+  object.set("hello", "world");
+  log::info("%s", object.get("hello"));
+  return 0;
+}

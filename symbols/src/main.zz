@@ -1,0 +1,30 @@
+using symbols
+using log
+
+symbol Readable;
+symbol Writable;
+
+struct Resource {
+  usize options;
+}
+
+fn writable(Resource *self) -> bool {
+  return Writable == (self->options & Writable);
+}
+
+fn readable(Resource *self) -> bool {
+  return Readable == (self->options & Readable);
+}
+
+fn main() -> int {
+  let readWrite = Resource { options: Readable | Writable };
+  let readOnly = Resource { options: Readable };
+
+  log::info("readWrite.readable=%lu", readWrite.readable());
+  log::info("readWrite.writable=%lu", readWrite.writable());
+
+  log::info("readOnly.readable=%lu", readOnly.readable());
+  log::info("readOnly.writable=%lu", readOnly.writable());
+
+  return 0;
+}

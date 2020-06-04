@@ -1,0 +1,18 @@
+[project]
+version = "0.1.0"
+name = "macros"
+cincludes = []
+cobjects = []
+pkgconfig = []
+cflags = []
+lflags = []
+
+[variants]
+default = []
+
+[dependencies]
+ast = "1"
+log = "1"
+mem = "1"
+
+[repos]

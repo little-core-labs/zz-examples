@@ -1,0 +1,6 @@
+using log;
+
+export fn main() -> int {
+    log::info("hello %s\n", "hello-world");
+    return 0;
+}

@@ -1,0 +1,31 @@
+using <stdlib.h>::{ random }
+using log;
+
+struct Model {
+  u32 id;
+}
+
+struct User {
+  Model super;
+}
+
+fn init(Model mut *self) {
+  self->id = (u32) random();
+}
+
+fn save(Model mut *self) {
+  // ...
+}
+
+fn id(Model *self) -> u32 {
+  return self->id;
+}
+
+fn main() -> int {
+  User mut user = {0};
+  user.init();
+  user.save();
+
+  log::info("user.id=%lu", user.id());
+  return 0;
+}

@@ -1,0 +1,17 @@
+[project]
+version = "0.1.0"
+name = "hello-world"
+cincludes = []
+cobjects = []
+pkgconfig = []
+cflags = []
+lflags = []
+
+[variants]
+default = []
+
+[dependencies]
+log = "1"
+mem = "1"
+
+[repos]
